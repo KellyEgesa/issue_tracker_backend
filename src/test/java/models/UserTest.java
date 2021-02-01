@@ -41,4 +41,11 @@ public class UserTest {
         User testUser = setUpUser();
         assertEquals("kelly.egesa@gmail.com", testUser.getEmail());
     }
+
+    @Test
+    public void equalsWorksAsExpected() {
+        User testUser = setUpUser();
+        User anotherTestUser = new User("KellyEgesa", "fBAda12432wre", "kelly.egesa@gmail.com");
+        assertTrue(testUser.equals(anotherTestUser));
+    }
 }
