@@ -2,6 +2,7 @@ package models;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.Objects;
 
 public class Project {
     private String projectName;
@@ -33,5 +34,21 @@ public class Project {
 
     public Timestamp getDuration() {
         return duration;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Project)) return false;
+        Project project = (Project) o;
+        return getProjectId() == project.getProjectId() &&
+                Objects.equals(getProjectName(), project.getProjectName()) &&
+                Objects.equals(getProjectDescription(), project.getProjectDescription()) &&
+                Objects.equals(getDuration(), project.getDuration());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getProjectName(), getProjectDescription(), getProjectId(), getDuration());
     }
 }

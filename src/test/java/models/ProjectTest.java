@@ -44,4 +44,11 @@ public class ProjectTest {
         Project testProject = setUpProject();
         assertEquals(rightNow.getDate(), testProject.getDuration().getDate());
     }
+
+    @Test
+    public void equalsOperatesWell() {
+        Project testProject = setUpProject();
+        Project anotherTestProject = new Project("Issue Tracker", "Tracking errors of the system", rightNow);
+        assertTrue(testProject.equals(anotherTestProject));
+    }
 }
