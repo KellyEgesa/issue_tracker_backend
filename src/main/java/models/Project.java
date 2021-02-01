@@ -7,7 +7,7 @@ import java.util.Objects;
 public class Project {
     private String projectName;
     private String projectDescription;
-    private int ProjectId;
+    private int projectId;
     private Timestamp duration;
 
     public Project(String projectName, String projectDescription, Timestamp duration) {
@@ -17,11 +17,11 @@ public class Project {
     }
 
     public int getProjectId() {
-        return ProjectId;
+        return projectId;
     }
 
     public void setProjectId(int projectId) {
-        ProjectId = projectId;
+        this.projectId = projectId;
     }
 
     public String getProjectName() {

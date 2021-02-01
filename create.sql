@@ -1,6 +1,10 @@
 CREATE DATABASE issue_tracker;
 \c issue_tracker;
-CREATE TABLE users (id SERIAL PRIMARY KEY, userName VARCHAR,positionInCompany VARCHAR, userRole VARCHAR,departmentId INTEGER);
-CREATE TABLE news (id SERIAL PRIMARY KEY, newsInfo VARCHAR, type VARCHAR,departmentId INTEGER);
-CREATE TABLE department (id SERIAL PRIMARY KEY, departmentName VARCHAR, departmentDescription VARCHAR,departmentEmployees INTEGER);
-CREATE DATABASE organisation_news_test WITH TEMPLATE organisation_news;
+CREATE TABLE users (userId SERIAL PRIMARY KEY, fireBaseUserId VARCHAR,userName VARCHAR, email VARCHAR);
+CREATE TABLE groups (groupId SERIAL PRIMARY KEY, groupName VARCHAR,userAdminId INTEGER);
+CREATE TABLE project (projectId SERIAL PRIMARY KEY, projectName VARCHAR, projectDescription VARCHAR,duration TIMESTAMP);
+CREATE TABLE tickets (ticketId SERIAL PRIMARY KEY, ticketName VARCHAR, ticketDescription VARCHAR, ticketStatus VARCHAR,ticketPriority VARCHAR,ticketDueDate TIMESTAMP,ticketProjectId INTEGER);
+CREATE TABLE groupproject (groupId INTEGER,projectId INTEGER);
+CREATE TABLE ticketuser (userId INTEGER,ticketId INTEGER);
+CREATE TABLE usergroup (userId INTEGER,groupId INTEGER);
+CREATE DATABASE issue_tracker_test WITH TEMPLATE issue_tracker;
