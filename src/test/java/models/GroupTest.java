@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 public class GroupTest {
 
     private Group setUpGroup() {
-        return new Group("Issue Tracker", 1);
+        return new Group("Microsoft", 1);
     }
 
     @Test
@@ -26,7 +26,7 @@ public class GroupTest {
     @Test
     public void getGroupNameReturnsCorrectValue() {
         Group testGroup = setUpGroup();
-        assertEquals("Issue Tracker", testGroup.getGroupName());
+        assertEquals("Microsoft", testGroup.getGroupName());
     }
 
     @Test
@@ -38,7 +38,7 @@ public class GroupTest {
     @Test
     public void equalsWorksAsExpected() {
         Group testGroup = setUpGroup();
-        Group anotherTestGroup = new Group("Issue Tracker", 1);
+        Group anotherTestGroup = new Group("Microsoft", 1);
         assertTrue(testGroup.equals(anotherTestGroup));
     }
 }
