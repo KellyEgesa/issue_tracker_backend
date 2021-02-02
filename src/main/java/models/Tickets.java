@@ -12,11 +12,11 @@ public class Tickets {
     private int ticketPriority;
     private Timestamp ticketDueDate;
 
-    Tickets(String ticketName,
-            String ticketDescription,
-            int ticketStatus,
-            int ticketPriority,
-            Timestamp ticketDueDate, int ticketProjectId) {
+    public Tickets(String ticketName,
+                   String ticketDescription,
+                   int ticketStatus,
+                   int ticketPriority,
+                   Timestamp ticketDueDate, int ticketProjectId) {
         this.ticketProjectId = ticketProjectId;
         this.ticketName = ticketName;
         this.ticketDescription = ticketDescription;
