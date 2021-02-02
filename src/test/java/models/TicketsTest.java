@@ -12,7 +12,7 @@ public class TicketsTest {
     Timestamp rightNow = new Timestamp(new Date().getTime());
 
     private Tickets setUpTickets() {
-        return new Tickets("Customer Complaint", "Bad food", "Open", "URGENT CRITICAL", rightNow, 1);
+        return new Tickets("Customer Complaint", "Bad food", 0, 1, rightNow, 1);
     }
 
     @Test
@@ -33,8 +33,8 @@ public class TicketsTest {
         Tickets testTickets = setUpTickets();
         assertEquals("Customer Complaint", testTickets.getTicketName());
         assertEquals("Bad food", testTickets.getTicketDescription());
-        assertEquals("Open", testTickets.getTicketStatus());
-        assertEquals("URGENT CRITICAL", testTickets.getTicketPriority());
+        assertEquals(0, testTickets.getTicketStatus());
+        assertEquals(1, testTickets.getTicketPriority());
         assertEquals(rightNow.getDay(), testTickets.getTicketDueDate().getDate());
         assertEquals(1, testTickets.getTicketProjectId());
     }
@@ -42,7 +42,7 @@ public class TicketsTest {
     @Test
     public void equalsWorksCorrectly() {
         Tickets testTickets = setUpTickets();
-        Tickets anotherTestTickets = new Tickets("Customer Complaint", "Bad food", "Open", "URGENT CRITICAL", rightNow, 1);
+        Tickets anotherTestTickets = new Tickets("Customer Complaint", "Bad food", 0, 1, rightNow, 1);
         assertTrue(testTickets.equals(anotherTestTickets));
     }
 }

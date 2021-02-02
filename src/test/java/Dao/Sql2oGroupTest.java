@@ -28,11 +28,28 @@ public class Sql2oGroupTest {
         return new Group("Microsoft", user.getUserId());
     }
 
+    private Group setUpSecondGroup() {
+        User user =  new User("KellyEgesa", "fBAda12432wre", "kelly.egesa@gmail.com");
+        userDao.saveNewUser(user);
+        return new Group("Moringa", user.getUserId());
+    }
+
     @Test
     public void createNewGroupSetsIdCorrectly() {
+        Group group = setUpGroup();
+        int originalId = group.getGroupId();
+        groupDao.createNewGroup(group);
+        assertNotEquals(originalId, group.getGroupId());
     }
 
     @Test
     public void getGroupById() {
+        Group group = setUpGroup();
+        Group anotherGroup = setUpSecondGroup();
+        groupDao.createNewGroup(group);
+        int originalId = group.getGroupId();
+        groupDao.createNewGroup(anotherGroup);
+        assertEquals("Microsoft", groupDao.getGroupById(originalId).getGroupName());
+
     }
 }

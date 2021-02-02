@@ -43,4 +43,14 @@ public class Sql2oUserTest {
         int originalId = user.getUserId();
         assertEquals("KellyEgesa", userDao.getUserById(originalId).getUsername());
     }
+
+    @Test
+    public void getUserByEmailReturnsCorrectUser() {
+        User user = setUpUser();
+        User secondUser = setUpSecondUser();
+        userDao.saveNewUser(user);
+        userDao.saveNewUser(secondUser);
+        String email = user.getEmail();
+        assertEquals("KellyEgesa", userDao.getUserByEmail(email).getUsername());
+    }
 }

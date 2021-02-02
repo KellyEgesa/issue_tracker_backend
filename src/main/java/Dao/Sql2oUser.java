@@ -29,4 +29,15 @@ public class Sql2oUser implements UserDao {
                     .executeAndFetchFirst(User.class);
         }
     }
+
+    @Override
+    public User getUserByEmail(String email) {
+        String sql = "SELECT * FROM users WHERE email = :email";
+        try (Connection con = DB.sql2o.open()) {
+            return con.createQuery(sql)
+                    .addParameter("email", email)
+                    .throwOnMappingFailure(false)
+                    .executeAndFetchFirst(User.class);
+        }
+    }
 }

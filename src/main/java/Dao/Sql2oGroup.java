@@ -6,7 +6,7 @@ import org.sql2o.Connection;
 public class Sql2oGroup implements GroupDao {
     @Override
     public void createNewGroup(Group newGroup) {
-        String sql = "INSERT INTO users (groupName ,userAdminId) VALUES (:groupName ,:userAdminId)";
+        String sql = "INSERT INTO groups (groupName ,userAdminId) VALUES (:groupName ,:userAdminId)";
         try (Connection con = DB.sql2o.open()) {
             int id = (int) con.createQuery(sql, true)
                     .addParameter("groupName", newGroup.getGroupName())
@@ -19,7 +19,7 @@ public class Sql2oGroup implements GroupDao {
 
     @Override
     public Group getGroupById(int id) {
-        String sql = "SELECT * FROM users WHERE groupId = :id";
+        String sql = "SELECT * FROM groups WHERE groupId = :id";
         try (Connection con = DB.sql2o.open()) {
             return con.createQuery(sql)
                     .addParameter("id", id)

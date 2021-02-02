@@ -8,14 +8,14 @@ public class Tickets {
     private int ticketId;
     private int ticketProjectId;
     private String ticketDescription;
-    private String ticketStatus;
-    private String ticketPriority;
+    private int ticketStatus;
+    private int ticketPriority;
     private Timestamp ticketDueDate;
 
     Tickets(String ticketName,
             String ticketDescription,
-            String ticketStatus,
-            String ticketPriority,
+            int ticketStatus,
+            int ticketPriority,
             Timestamp ticketDueDate, int ticketProjectId) {
         this.ticketProjectId = ticketProjectId;
         this.ticketName = ticketName;
@@ -41,11 +41,11 @@ public class Tickets {
         return ticketDescription;
     }
 
-    public String getTicketStatus() {
+    public int getTicketStatus() {
         return ticketStatus;
     }
 
-    public String getTicketPriority() {
+    public int getTicketPriority() {
         return ticketPriority;
     }
 
