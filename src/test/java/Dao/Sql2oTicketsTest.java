@@ -27,8 +27,8 @@ public class Sql2oTicketsTest {
 
 
     Timestamp rightNow = new Timestamp(new Date().getTime());
-    Project project = new Project("MicroFinance", "Saving small amount of money", rightNow);
-    Project secondProject = new Project("Issue Tracker", "Tracking errors of the system", rightNow);
+    Project project = new Project("MicroFinance", "Saving small amount of money", 1, rightNow);
+    Project secondProject = new Project("Issue Tracker", "Tracking errors of the system", 1, rightNow);
 
     private Tickets setUpTickets() {
         projectDao.saveNewProject(project);

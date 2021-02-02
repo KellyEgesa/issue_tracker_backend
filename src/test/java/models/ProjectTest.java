@@ -11,7 +11,7 @@ public class ProjectTest {
     Timestamp rightNow = new Timestamp(new Date().getTime());
 
     private Project setUpProject() {
-        return new Project("Issue Tracker", "Tracking errors of the system", rightNow);
+        return new Project("Issue Tracker", "Tracking errors of the system", 1, rightNow);
     }
 
     @Test
@@ -37,6 +37,7 @@ public class ProjectTest {
     public void getProjectDescriptionReturnsCorrectDescription() {
         Project testProject = setUpProject();
         assertEquals("Tracking errors of the system", testProject.getProjectDescription());
+        assertEquals(1, testProject.getGroupId());
     }
 
     @Test
@@ -48,7 +49,7 @@ public class ProjectTest {
     @Test
     public void equalsOperatesWell() {
         Project testProject = setUpProject();
-        Project anotherTestProject = new Project("Issue Tracker", "Tracking errors of the system", rightNow);
+        Project anotherTestProject = new Project("Issue Tracker", "Tracking errors of the system", 1, rightNow);
         assertTrue(testProject.equals(anotherTestProject));
     }
 }

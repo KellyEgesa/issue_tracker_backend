@@ -3,14 +3,17 @@ package Dao;
 import models.Project;
 import org.sql2o.Connection;
 
-public class Sql2oProject implements ProjectDao{
+import java.util.List;
+
+public class Sql2oProject implements ProjectDao {
     @Override
     public void saveNewProject(Project newProject) {
-        String sql = "INSERT INTO project (projectName ,projectDescription , duration) VALUES (:projectName ,:projectDescription , :duration)";
+        String sql = "INSERT INTO project (projectName ,projectDescription,groupId, duration) VALUES (:projectName ,:projectDescription ,:groupId, :duration)";
         try (Connection con = DB.sql2o.open()) {
             int id = (int) con.createQuery(sql, true)
                     .addParameter("projectName", newProject.getProjectName())
                     .addParameter("projectDescription", newProject.getProjectDescription())
+                    .addParameter("groupId", newProject.getGroupId())
                     .addParameter("duration", newProject.getDuration())
                     .executeUpdate()
                     .getKey();
@@ -26,6 +29,17 @@ public class Sql2oProject implements ProjectDao{
                     .addParameter("id", id)
                     .throwOnMappingFailure(false)
                     .executeAndFetchFirst(Project.class);
+        }
+    }
+
+    @Override
+    public List<Project> getProjectByGroupId(int groupId) {
+        String sql = "SELECT * FROM project WHERE groupId = :groupId";
+        try (Connection con = DB.sql2o.open()) {
+            return con.createQuery(sql)
+                    .addParameter("groupId", groupId)
+                    .throwOnMappingFailure(false)
+                    .executeAndFetch(Project.class);
         }
     }
 }
