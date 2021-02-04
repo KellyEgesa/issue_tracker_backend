@@ -1,5 +1,6 @@
 import Dao.*;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import exceptions.ApiException;
 import models.*;
 
@@ -44,6 +45,17 @@ public class App {
             return gson.toJson(user);
         }));
 
+        get("/user/firebase/:fireBaseUserId", "application/json", ((request, response) -> {
+            String fireBaseUserId = request.params("fireBaseUserId");
+            User user = userDao.getUserByFirebase(fireBaseUserId);
+            List<Group> groups = userGroupDao.getUsersGroup(user.getUserId());
+
+            GetUserDetails getUserDetails = new GetUserDetails(user, groups);
+
+            response.status(201);
+            return gson.toJson(getUserDetails);
+        }));
+
         get("/user/:email", "application/json", ((request, response) -> {
             String email = request.params("email");
             User user = userDao.getUserByEmail(email);
@@ -62,11 +74,20 @@ public class App {
             return gson.toJson(newGroup);
         });
 
-        get("/group/:id", "application/json", ((request, response) -> {
+        get("/group/:id/", "application/json", ((request, response) -> {
             int groupId = Integer.parseInt(request.params("id"));
             Group group = groupDao.getGroupById(groupId);
+            List<Project> projects = projectDao.getProjectByGroupId(group.getGroupId());
+            List<User> users = userGroupDao.getGroupUsers(group.getGroupId());
+            List<Tickets> tickets = null;
+            if (projects.size() > 0) {
+                tickets = ticketsDao.getTicketsByProjectId(projects.get(0).getProjectId());
+            }
+
+            GetAll getAll = new GetAll(group, projects, users, tickets);
+
             response.status(201);
-            return gson.toJson(group);
+            return gson.toJson(getAll);
         }));
 
         post("/project/new", "application/json", (req, res) -> {
@@ -178,8 +199,6 @@ public class App {
             response.status(201);
             return gson.toJson(users);
         }));
-
-
 
 
         after(((request, response) -> {

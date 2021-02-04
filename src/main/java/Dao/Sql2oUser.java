@@ -31,6 +31,17 @@ public class Sql2oUser implements UserDao {
     }
 
     @Override
+    public User getUserByFirebase(String fireBaseUserId) {
+        String sql = "SELECT * FROM users WHERE fireBaseUserId = :fireBaseUserId";
+        try (Connection con = DB.sql2o.open()) {
+            return con.createQuery(sql)
+                    .addParameter("fireBaseUserId", fireBaseUserId)
+                    .throwOnMappingFailure(false)
+                    .executeAndFetchFirst(User.class);
+        }
+    }
+
+    @Override
     public User getUserByEmail(String email) {
         String sql = "SELECT * FROM users WHERE email = :email";
         try (Connection con = DB.sql2o.open()) {

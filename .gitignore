@@ -75,3 +75,7 @@ settings.gradle
 .idea
 .idea/
 *.iml
+
+target
+
+pom.xml
